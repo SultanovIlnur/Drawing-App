@@ -64,21 +64,19 @@ window.onload = function() {
 
     modeButtons.addEventListener("click", function(event){
         const currentButton = event.target;
+        currentModeText.innerHTML = currentButton.innerHTML;
+        mode = currentButton.innerHTML;
         switch (currentButton.innerHTML){
             case modes[0]:
-                currentModeText.innerHTML = currentButton.innerHTML;
                 mode = modes[0];
                 break;
             case modes[1]:
-                currentModeText.innerHTML = currentButton.innerHTML;
                 mode = modes[1];
                 break;
             case modes[2]:
-                currentModeText.innerHTML = currentButton.innerHTML;
                 mode = modes[2];
                 break;
             case modes[3]:
-                currentModeText.innerHTML = currentButton.innerHTML;
                 mode = modes[3];
                 break;
         }
