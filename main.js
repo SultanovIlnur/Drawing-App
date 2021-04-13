@@ -3,15 +3,19 @@ window.onload = function() {
     var context = canvas.getContext('2d');
     var boundings = canvas.getBoundingClientRect();
 
-    var operationButtons = document.getElementsByClassName('operationButtons')[0];
-    var currentOpButton = 0;
+    const modes = ['Paint', 'Fill', 'Erase', 'Clear'];
+    var mode = modes[0];
 
-    var fillStyle = 'black';
-    var fillStyles = ['black', 'white', 'red', 'green', 'yellow'];
+    var modeButtons = document.getElementById('modeButtons');
+
+    const fillStyles = ['Black', 'White', 'Red', 'Green', 'Yellow'];
+    var fillStyle = fillStyles[0];
 
     var lineWidth = 1;
 
-    var mode = 'paint';
+    const currentModeText = document.getElementById('currentMode');
+    currentModeText.innerHTML = "Paint";
+    const currentMouseCoords = document.getElementById('currentMouseCoords');
 
     var mouse = {
         X: 0,
@@ -22,31 +26,56 @@ window.onload = function() {
     function setMousePosition(event) {
         mouse.X = event.clientX - boundings.left;
         mouse.Y = event.clientY - boundings.top;
+        currentMouseCoords.innerHTML = mouse.X + ", " + mouse.Y;
     }
 
     var clearButton = document.getElementById('clearButton');
 
     canvas.addEventListener('mousedown', function(event) {
-        isDrawing = true;
+        if (fillStyle == fillStyles[0]){
+            isDrawing = true;
         setMousePosition(event);
         context.beginPath();
         context.moveTo(mouse.X, mouse.Y);
+        }
     });
 
     canvas.addEventListener('mousemove', function(event) {
-        setMousePosition(event);
-        if (isDrawing) {
-            context.lineTo(mouse.X, mouse.Y);
-            context.stroke();
+        if (fillStyle == fillStyles[0]){
+            setMousePosition(event);
+            if (isDrawing) {
+                context.lineTo(mouse.X, mouse.Y);
+                context.stroke();
+            }
         }
     });
 
     canvas.addEventListener('mouseup', function(event) {
-        setMousePosition(event);
+        if(fillStyle == fillStyles[0]){
+            setMousePosition(event);
         isDrawing = false;
+        }
     });
 
-    canvas.addEventListener('', function() {
-
+    modeButtons.addEventListener("click", function(event){
+        const currentButton = event.target;
+        switch (currentButton.innerHTML){
+            case fillStyles[0]:
+                currentModeText.innerHTML = currentButton.innerHTML;
+                fillStyle = fillStyles[0];
+                break;
+            case fillStyles[1]:
+                currentModeText.innerHTML = currentButton.innerHTML;
+                fillStyle = fillStyles[1];
+                break;
+            case fillStyles[2]:
+                currentModeText.innerHTML = currentButton.innerHTML;
+                fillStyle = fillStyles[2];
+                break;
+            case fillStyles[3]:
+                currentModeText.innerHTML = currentButton.innerHTML;
+                fillStyle = fillStyles[3];
+                break;
+        }
     });
 };
