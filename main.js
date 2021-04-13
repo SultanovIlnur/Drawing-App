@@ -63,7 +63,7 @@ window.onload = function() {
     });
 
     modeButtons.addEventListener("click", function(event){
-        const currentButton = event.target;
+        let currentButton = event.target;
         currentModeText.innerHTML = currentButton.innerHTML;
         mode = currentButton.innerHTML;
         switch (currentButton.innerHTML){
