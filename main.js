@@ -3,7 +3,7 @@ window.onload = function() {
     var context = canvas.getContext('2d');
     var boundings = canvas.getBoundingClientRect();
 
-    const modes = ['Paint', 'Fill', 'Erase', 'Clear'];
+    const modes = ['Paint', 'Fill', 'Erase'];
     var mode = modes[0];
 
     var modeButtons = document.getElementById('modeButtons');
@@ -43,6 +43,12 @@ window.onload = function() {
         context.beginPath();
         context.moveTo(mouse.X, mouse.Y);
         }
+        if (mode == modes[1]){
+
+        }
+        if (mode == modes[2]){
+
+        }
     });
 
     canvas.addEventListener('mousemove', function(event) {
@@ -53,12 +59,24 @@ window.onload = function() {
                 context.stroke();
             }
         }
+        if (mode == modes[1]){
+
+        }
+        if (mode == modes[2]){
+
+        }
     });
 
     canvas.addEventListener('mouseup', function(event) {
-        if(mode == modes[0]){
+        if (mode == modes[0]){
             setMousePosition(event);
         isDrawing = false;
+        }
+        if (mode == modes[1]){
+
+        }
+        if (mode == modes[2]){
+
         }
     });
 
@@ -76,9 +94,12 @@ window.onload = function() {
             case modes[2]:
                 mode = modes[2];
                 break;
-            case modes[3]:
-                mode = modes[3];
-                break;
         }
     });
+
+    document.getElementById('clearButton').onclick = clearCanvas;
+
+    function clearCanvas(){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
 };
